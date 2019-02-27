@@ -39,9 +39,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>5.0-beta1</version>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+            <version>5.0-alpha1</version>
         </dependency>
 
         <!-- We translate all commons logging calls to SLF4J -->
@@ -71,7 +71,7 @@
             </exclusions>
         </dependency>
     </dependencies>
-
+<!--
     <build>
         <plugins>
             <plugin>
@@ -85,6 +85,6 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>
+    </build>-->
 
 </project>
