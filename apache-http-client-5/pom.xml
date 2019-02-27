@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2019, Joyent, Inc. All rights reserved.
+
+ This Source Code Form is subject to the terms of the Mozilla Public
+ License, v. 2.0. If a copy of the MPL was not distributed with this
+ file, You can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>java-http-signature</artifactId>
+        <groupId>com.joyent.http-signature</groupId>
+        <version>4.0.10-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>apache-http-client-signature-5</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <!-- Dependency versions -->
+        <dependency.http-signature-common.version>4.0.10-SNAPSHOT</dependency.http-signature-common.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.joyent.http-signature</groupId>
+            <artifactId>http-signature-common</artifactId>
+            <version>${dependency.http-signature-common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.joyent.http-signature</groupId>
+            <artifactId>http-signature-common</artifactId>
+            <version>${dependency.http-signature-common.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>5.0-beta1</version>
+        </dependency>
+
+        <!-- We translate all commons logging calls to SLF4J -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${dependency.slfj.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>org.slf4j</artifactId>
+                    <groupId>slf4j-api</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Logback as SLF4J implementation when running tests -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${dependency.logback.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>org.slf4j</artifactId>
+                    <groupId>slf4j-api</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>${maven.test.skip}</skip>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
